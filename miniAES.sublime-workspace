@@ -1,0 +1,279 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"B",
+				"ByteMul"
+			],
+			[
+				"for",
+				"for	For Loop"
+			],
+			[
+				"m",
+				"MINIAES_INTERNAL_MINIAES_UTILS_HPP_"
+			],
+			[
+				"CGIma",
+				"CGImage"
+			],
+			[
+				"CGImage",
+				"CGImageGetWidth"
+			],
+			[
+				"GL_TEX",
+				"GL_TEXTURE_MIN_FILTER"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "miniAES/test_main.cpp",
+			"settings":
+			{
+				"buffer_size": 231,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "miniAES/internal/miniAES-Utils.cpp",
+			"settings":
+			{
+				"buffer_size": 5086,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 404.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/internal/miniAES-Utils.cpp",
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/test_main.cpp",
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/internal/miniAES-Utils.hpp",
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/internal/miniAES-Types.hpp",
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/miniAES.hpp",
+		"/Users/seonggwang/OpenSource/miniature-AES/miniAES/internal/miniAES-Types.cpp",
+		"/Users/seonggwang/Library/Application Support/iPhone Simulator/6.1/Applications/DD6FEB20-17C4-47B5-9A59-D4EBB16595BF/pushslayer.app/app_data.json",
+		"/Users/seonggwang/OpenSource/pushslayer/pushslayer/Classes/UserData.cpp.orig",
+		"/Users/seonggwang/OpenSource/pushslayer/pushslayer/Resources/enemy_combination copy.json",
+		"/Users/seonggwang/OpenSource/pushslayer/pushslayer/Resources/fonts/ingame_score.fnt",
+		"/Library/cocos2d-2.0-x-2.0.4/cocos2dx/platform/android/CCApplication.h",
+		"/Library/cocos2d-2.0-x-2.0.4/cocos2dx/platform/android/CCApplication.cpp",
+		"/Users/seonggwang/Library/Application Support/iPhone Simulator/6.1/Applications/2C2985A2-D957-4DF4-B74E-8FB3C421969B/pushslayer.app/app_data.json",
+		"/Users/seonggwang/Downloads/sample_visual_c_sharp_aes256_imcore_net 2/sample_visual_c_sharp_aes256_imcore_net/AES256Cipher.cs",
+		"/Users/seonggwang/OpenSource/Framework/02_Library/License/COPYING.LIB",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/fish_twinkle.ptc",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/agreement_1.spr",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/mini_balloon_bg.hif",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/mini_fish_bg",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/ui_rankchange.hif",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/agreement_2.spr",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/cashshop.spr",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/bgm00.hgg",
+		"/Users/seonggwang/Downloads/com.hotdog.tinybattle-1/assets/res/bgm02.hgg",
+		"/Users/seonggwang/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/seonggwang/OpenSource/pushslayer/pushslayer/proj.android/jni/list.txt",
+		"/Users/seonggwang/OpenSource/pushslayer/pushslayer/proj.android/jni/Android.mk",
+		"/Users/seonggwang/Library/Application Support/iPhone Simulator/6.1/Applications/63548F05-2504-405F-B661-9AA224745679/pushslayer.app/AppSetting.json",
+		"/Users/seonggwang/OpenSource/bestbeautiful/BestBeautiful/EditView.h",
+		"/Users/seonggwang/OpenSource/bestbeautiful/BestBeautiful/EditView.mm",
+		"/Users/seonggwang/Library/Application Support/iPhone Simulator/6.1/Applications/F4B34C18-9A71-4D1B-AE19-967831DCBF74/pushslayer.app/AppSetting.json"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"{",
+			"./",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"-5",
+			"\""
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"-20",
+			"\\\"",
+			"{\n\"unlock\": true,\n\"hero_type\": 0,\n\"name\": \"JoonSeok\",\n\"hp_max\": 4,\n\"attack\": 10,\n\"armor_level\": 1,\n\"weapon_level\": 1,\n\"wing_level\": 1,\n\"up_speed\": 5000,\n\"down_speed\": 800,\n\"fever_power\": 1,\n\"fever_duration_max\": 15,\n\"fever_gauge_max\": 15,\n\"fever_period\": 5,\n\"combo_period\": 3,\n\"jump_speeds\": [(10)\n{\n\"value\": 100\n},-\n{\n\"value\": 120\n},-\n{\n\"value\": 140\n},-\n{\n\"value\": 160\n},-\n{\n\"value\": 180\n},-\n{\n\"value\": 200\n},-\n{\n\"value\": 220\n},-\n{\n\"value\": 240\n},-\n{\n\"value\": 260\n},-\n{\n\"value\": 280\n}-\n]-\n}",
+			"\\\""
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "miniAES/test_main.cpp",
+					"settings":
+					{
+						"buffer_size": 231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "miniAES/internal/miniAES-Utils.cpp",
+					"settings":
+					{
+						"buffer_size": 5086,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"miniaes.hpp",
+				"/Users/seonggwang/OpenSource/miniature-AES/miniAES/miniAES.hpp"
+			],
+			[
+				"mini",
+				"/Users/seonggwang/OpenSource/miniature-AES/miniAES/miniAES.hpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true
+}
