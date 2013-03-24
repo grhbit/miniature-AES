@@ -2,27 +2,35 @@
 #define MINIAES_INTERNAL_MINIAES_UTILS_HPP_
 
 #include "miniAES-Types.hpp"
+#include <string>
 
 namespace mini {
 	namespace internal {
-		void SubWord(Word *);
-		void RotWord(Word *);
+		Word SubWord(Word);
+		Word RotWord(Word);
+
+		void KeyInit(const Byte *, Key *, KeyLength keyLength);
+		void KeyExpansion(Key *);
+		void KeyRelease(Key *);
 
 		Byte ByteMul(Byte lhs, Byte rhs);
 
 		void SubBytes(State *);
 		void ShiftRows(State *);
 		void MixColumns(State *);
+		void AddRoundKey(State *, Key *);
 
 		void InvShiftRows(State *);
 		void InvSubBytes(State *);
 		void InvMixColumns(State *);
-
-		void AddRoundKey(State *);
+		void InvAddRoundKey(State *, Key *);
 
 		void PrintBytes(State *);
 
 	}	// namespace internal
+
+	void StringToBytes(const std::string&, internal::Byte *, size_t bytes_size);
+	void BytesToString(const internal::Byte *, size_t bytes_size, std::string&);
 
 }	// namespace mini
 

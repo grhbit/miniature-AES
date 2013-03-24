@@ -42,6 +42,93 @@ namespace mini {
 			0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
 		};
 
+		inline Word MakeWord(Byte x, Byte y, Byte z, Byte w)
+		{
+			return static_cast<Word>(
+				(x << 0x18) |
+				(y << 0x10) |
+				(z << 0x08) |
+				(w << 0x00));
+		}
+
+		Word SubWord(Word w)
+		{
+			return static_cast<Word>(
+				(SBox[(w & 0x000000ff) >> 0x00] << 0x00) |
+				(SBox[(w & 0x0000ff00) >> 0x08] << 0x08) |
+				(SBox[(w & 0x00ff0000) >> 0x10] << 0x10) |
+				(SBox[(w & 0xff000000) >> 0x18] << 0x18));
+		}
+
+		Word RotWord(Word w)
+		{
+			return static_cast<Word>(
+				((w & 0x000000ff) << 0x08) |
+				((w & 0x0000ff00) << 0x08) |
+				((w & 0x00ff0000) << 0x08) |
+				((w & 0xff000000) >> 0x18));
+		}
+
+		void KeyInit(const Byte *bytes, Key *key, KeyLength keyLength)
+		{
+			if (key == 0) {
+				return;
+			}
+
+			if ((keyLength < 4) || (keyLength >= 128)) {
+				return;
+			}
+
+			switch (keyLength) {
+				case kKeyLength128Bit:
+					key->keyLength = 4;
+					break;
+				case kKeyLength196Bit:
+					key->keyLength = 6;
+					break;
+				case kKeyLength256Bit:
+					key->keyLength = 8;
+					break;
+				default:
+					return;
+			}
+
+			key->a = new Word[4 * (key->keyLength+6 + 1)];
+
+			for (int i = 0; i < key->keyLength; ++i) {
+				key->a[i] = MakeWord(bytes[i*4 + 0], bytes[i*4 + 1], bytes[i*4 + 2], bytes[i*4 + 3]);
+			}
+		}
+
+		void KeyExpansion(Key *key)
+		{
+			Byte rcon = 0x01;
+			Word nK = key->keyLength;
+			Word temp;
+
+			for (int i = nK; i < 4*(nK+6 +1); ++i) {
+				temp = key->a[i-1];
+				if ((i%nK) == 0) {
+					temp = SubWord(RotWord(temp)) ^	MakeWord(rcon, 0, 0, 0);
+					rcon = ByteMul(0x02, rcon);
+				} else if ((nK>6) && ((i%nK) == 4)) {
+					temp = SubWord(temp);
+				}
+				key->a[i] = key->a[i-nK] ^ temp;
+			}
+		}
+
+		void KeyRelease(Key *key)
+		{
+			if (key != 0) {
+				if (key->a != 0) {
+					memset(key->a, 0, sizeof(Word)*(4 * (key->keyLength+6 + 1)));
+					delete []key->a;
+					key->a = 0;
+				}
+			}
+		}
+
 		Byte ByteMul(Byte lhs, Byte rhs)
 		{
 			Byte ret = 0;
@@ -62,6 +149,21 @@ namespace mini {
 			}
 
 			return ret;
+		}
+
+		inline void AddRoundKeyImpl(State *state, Key *key)
+		{
+			Word rK = 0;
+			Word nR = state->round;
+			Word nK = key->keyLength;
+
+			for (int i = 0; i < 4; ++i) {
+				rK = key->a[nR*4 + i];
+				state->m[0][i] ^= static_cast<Byte>((rK & 0xff000000) >> 0x18);
+				state->m[1][i] ^= static_cast<Byte>((rK & 0x00ff0000) >> 0x10);
+				state->m[2][i] ^= static_cast<Byte>((rK & 0x0000ff00) >> 0x08);
+				state->m[3][i] ^= static_cast<Byte>((rK & 0x000000ff) >> 0x00);
+			}
 		}
 
 		void SubBytes(State *state)
@@ -131,6 +233,12 @@ namespace mini {
 			memcpy(state->a, tmp.a, sizeof(state->a));
 		}
 
+		void AddRoundKey(State *state, Key *key)
+		{
+			AddRoundKeyImpl(state, key);
+			++(state->round);
+		}
+
 		void InvShiftRows(State *state)
 		{
 			State tmp;
@@ -198,6 +306,12 @@ namespace mini {
 			memcpy(state->a, tmp.a, sizeof(state->a));
 		}
 
+		void InvAddRoundKey(State *state, Key *key)
+		{
+			--(state->round);
+			AddRoundKeyImpl(state, key);
+		}
+
 		void PrintBytes(State *state)
 		{
 			for (int row = 0; row < 4; ++row) {
@@ -210,5 +324,13 @@ namespace mini {
 		}
 
 	}	// namespace internal
+
+	void StringToBytes(const std::string& str, internal::Byte *bytes, size_t bytes_size)
+	{
+	}
+
+	void BytesToString(const internal::Byte *bytes, size_t bytes_size, std::string& str)
+	{
+	}
 
 }	// namespace mini

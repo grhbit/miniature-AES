@@ -4,10 +4,10 @@
 namespace mini {
 	namespace internal {
 		typedef unsigned char Byte;
-
-		typedef unsigned short Word;
+		typedef unsigned long Word;
 
 		typedef struct {
+			Word round;
 			union {
 				Byte a[16];
 				Byte m[4][4];
@@ -15,15 +15,22 @@ namespace mini {
 		} State;
 
 		typedef struct {
-		} CipherKey;
+			Word keyLength;
+			Word *a;
+		} Key;
 
 	}	// namespace internal
 
 	typedef enum {
-		kKeyLengh128BIT = 128 / 32,
-		kKeyLengh196BIT = 196 / 32,
-		kKeyLengh256BIT = 256 / 32,
+		kKeyLength128Bit = 128 / 32,
+		kKeyLength196Bit = 196 / 32,
+		kKeyLength256Bit = 256 / 32,
 	} KeyLength;
+
+	typedef struct {
+		internal::State *state;
+		internal::Key *key;
+	} AES_State;
 
 }	// namespace mini
 
