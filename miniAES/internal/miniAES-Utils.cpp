@@ -68,7 +68,7 @@ namespace mini {
 				((w & 0x00ff0000) << 0x08) |
 				((w & 0xff000000) >> 0x18));
 		}
-		
+
 		Byte ByteMul(Byte lhs, Byte rhs)
 		{
 			Byte ret = 0;
@@ -327,10 +327,39 @@ namespace mini {
 
 	void StringToBytes(const std::string& str, internal::Byte *bytes, size_t bytes_size)
 	{
+		size_t length = 0;
+		if (str.length()/2 > bytes_size) {
+			length = str.length()/2;
+		} else {
+			length = bytes_size;
+		}
+
+		std::string conv_str = str;
+		std::transform(conv_str.begin(), conv_str.end(), conv_str.begin(), ::toupper);
+
+		const char *string = conv_str.c_str();
+
+		unsigned int n;
+		for (size_t i = 0; i < length; ++i) {
+			sscanf(string+2*i, "%2X", &n);
+			bytes[i] = n;
+		}
 	}
 
 	void BytesToString(const internal::Byte *bytes, size_t bytes_size, std::string& str)
 	{
+		size_t length = bytes_size;
+
+		std::string tmp;
+		tmp.resize(length * 2);
+		char *string = const_cast<char *>(tmp.data());
+
+		unsigned int n;
+		for (size_t i = 0; i < length; ++i) {
+			sprintf(string+2*i, "%02X", bytes[i]);
+		}
+
+		str = tmp;
 	}
 
 }	// namespace mini
