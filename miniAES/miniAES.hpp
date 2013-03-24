@@ -7,6 +7,8 @@ namespace mini {
 
 	class AES {
 	public:
+		static std::string Encrypt(const std::string&, KeyLength, const char *hexKey);
+		static std::string Decrypt(const std::string&, KeyLength, const char *hexKey);
 	};
 
 }	// namespace mini

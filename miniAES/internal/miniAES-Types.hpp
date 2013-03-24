@@ -27,11 +27,6 @@ namespace mini {
 		kKeyLength256Bit = 256 / 32,
 	} KeyLength;
 
-	typedef struct {
-		internal::State *state;
-		internal::Key *key;
-	} AES_State;
-
 }	// namespace mini
 
 #endif	// MINIAES_INTERNAL_MINIAES_TYPES_HPP_

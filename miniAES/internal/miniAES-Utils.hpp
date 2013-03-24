@@ -20,12 +20,17 @@ namespace mini {
 		void InvMixColumns(State *);
 		void InvAddRoundKey(State *, Key *);
 
+		void BytesToState(const Byte *, State *);
+		void StateToBytes(const State *, Byte *);
 		void PrintBytes(State *);
 
-	}	// namespace internal
+		void Encrypt(internal::State *, internal::Key *);
+		void Decrypt(internal::State *, internal::Key *);
 
-	void StringToBytes(const std::string&, internal::Byte *, size_t bytes_size);
-	void BytesToString(const internal::Byte *, size_t bytes_size, std::string&);
+		void StringToBytes(const std::string&, internal::Byte *, size_t bytes_size);
+		void BytesToString(const internal::Byte *, size_t bytes_size, std::string&);
+
+	}	// namespace internal
 
 }	// namespace mini
 

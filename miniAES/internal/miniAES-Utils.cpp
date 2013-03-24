@@ -312,6 +312,49 @@ namespace mini {
 			AddRoundKeyImpl(state, key);
 		}
 
+		void BytesToState(const Byte *bytes, State *state)
+		{
+			state->m[0][0] = bytes[0];
+			state->m[1][0] = bytes[1];
+			state->m[2][0] = bytes[2];
+			state->m[3][0] = bytes[3];
+
+			state->m[0][1] = bytes[4];
+			state->m[1][1] = bytes[5];
+			state->m[2][1] = bytes[6];
+			state->m[3][1] = bytes[7];
+
+			state->m[0][2] = bytes[8];
+			state->m[1][2] = bytes[9];
+			state->m[2][2] = bytes[10];
+			state->m[3][2] = bytes[11];
+
+			state->m[0][3] = bytes[12];
+			state->m[1][3] = bytes[13];
+			state->m[2][3] = bytes[14];
+			state->m[3][3] = bytes[15];
+		}
+
+		void StateToBytes(const State *state, Byte *bytes)
+		{
+			bytes[0] = state->m[0][0];
+			bytes[1] = state->m[1][0];
+			bytes[2] = state->m[2][0];
+			bytes[3] = state->m[3][0];
+			bytes[4] = state->m[0][1];
+			bytes[5] = state->m[1][1];
+			bytes[6] = state->m[2][1];
+			bytes[7] = state->m[3][1];
+			bytes[8] = state->m[0][2];
+			bytes[9] = state->m[1][2];
+			bytes[10] = state->m[2][2];
+			bytes[11] = state->m[3][2];
+			bytes[12] = state->m[0][3];
+			bytes[13] = state->m[1][3];
+			bytes[14] = state->m[2][3];
+			bytes[15] = state->m[3][3];
+		}
+
 		void PrintBytes(State *state)
 		{
 			for (int row = 0; row < 4; ++row) {
@@ -323,43 +366,77 @@ namespace mini {
 
 		}
 
+		void Encrypt(internal::State *state, internal::Key *key)
+		{
+			AddRoundKey(state, key);
+
+			const int nR = key->keyLength+6-1;
+			for (int i = 0; i < nR; ++i) {
+				SubBytes(state);
+				ShiftRows(state);
+				MixColumns(state);
+				AddRoundKey(state, key);
+			}
+
+			SubBytes(state);
+			ShiftRows(state);
+			AddRoundKey(state, key);
+		}
+
+		void Decrypt(internal::State *state, internal::Key *key)
+		{
+			InvAddRoundKey(state, key);
+
+			const int nR = key->keyLength+6-1;
+			for (int i = 0; i < nR; ++i) {
+				InvShiftRows(state);
+				InvSubBytes(state);
+				InvAddRoundKey(state, key);
+				InvMixColumns(state);
+			}
+
+			InvShiftRows(state);
+			InvSubBytes(state);
+			InvAddRoundKey(state, key);
+		}
+
+		void StringToBytes(const std::string& str, internal::Byte *bytes, size_t bytes_size)
+		{
+			size_t length = 0;
+			if (str.length()/2 > bytes_size) {
+				length = str.length()/2;
+			} else {
+				length = bytes_size;
+			}
+
+			std::string conv_str = str;
+			std::transform(conv_str.begin(), conv_str.end(), conv_str.begin(), ::toupper);
+
+			const char *string = conv_str.c_str();
+
+			unsigned int n;
+			for (size_t i = 0; i < length; ++i) {
+				sscanf(string+2*i, "%2X", &n);
+				bytes[i] = n;
+			}
+		}
+
+		void BytesToString(const internal::Byte *bytes, size_t bytes_size, std::string& str)
+		{
+			size_t length = bytes_size;
+
+			std::string tmp;
+			tmp.resize(length * 2);
+			char *string = const_cast<char *>(tmp.data());
+
+			unsigned int n;
+			for (size_t i = 0; i < length; ++i) {
+				sprintf(string+2*i, "%02X", bytes[i]);
+			}
+
+			str = tmp;
+		}
+
 	}	// namespace internal
-
-	void StringToBytes(const std::string& str, internal::Byte *bytes, size_t bytes_size)
-	{
-		size_t length = 0;
-		if (str.length()/2 > bytes_size) {
-			length = str.length()/2;
-		} else {
-			length = bytes_size;
-		}
-
-		std::string conv_str = str;
-		std::transform(conv_str.begin(), conv_str.end(), conv_str.begin(), ::toupper);
-
-		const char *string = conv_str.c_str();
-
-		unsigned int n;
-		for (size_t i = 0; i < length; ++i) {
-			sscanf(string+2*i, "%2X", &n);
-			bytes[i] = n;
-		}
-	}
-
-	void BytesToString(const internal::Byte *bytes, size_t bytes_size, std::string& str)
-	{
-		size_t length = bytes_size;
-
-		std::string tmp;
-		tmp.resize(length * 2);
-		char *string = const_cast<char *>(tmp.data());
-
-		unsigned int n;
-		for (size_t i = 0; i < length; ++i) {
-			sprintf(string+2*i, "%02X", bytes[i]);
-		}
-
-		str = tmp;
-	}
 
 }	// namespace mini
