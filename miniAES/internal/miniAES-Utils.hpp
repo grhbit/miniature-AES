@@ -6,14 +6,9 @@
 
 namespace mini {
 	namespace internal {
-		Word SubWord(Word);
-		Word RotWord(Word);
-
 		void KeyInit(const Byte *, Key *, KeyLength keyLength);
 		void KeyExpansion(Key *);
 		void KeyRelease(Key *);
-
-		Byte ByteMul(Byte lhs, Byte rhs);
 
 		void SubBytes(State *);
 		void ShiftRows(State *);

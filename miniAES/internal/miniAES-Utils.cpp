@@ -68,6 +68,28 @@ namespace mini {
 				((w & 0x00ff0000) << 0x08) |
 				((w & 0xff000000) >> 0x18));
 		}
+		
+		Byte ByteMul(Byte lhs, Byte rhs)
+		{
+			Byte ret = 0;
+			Byte carry;
+			for (Byte count = 0; count < 8; ++count) {
+				if (rhs&1) {
+					ret ^= lhs;
+				}
+
+				carry = static_cast<Byte>(lhs&0x80);
+				lhs <<= 1;
+
+				if (carry) {
+					lhs ^= 0x1b;
+				}
+
+				rhs >>= 1;
+			}
+
+			return ret;
+		}
 
 		void KeyInit(const Byte *bytes, Key *key, KeyLength keyLength)
 		{
@@ -127,28 +149,6 @@ namespace mini {
 					key->a = 0;
 				}
 			}
-		}
-
-		Byte ByteMul(Byte lhs, Byte rhs)
-		{
-			Byte ret = 0;
-			Byte carry;
-			for (Byte count = 0; count < 8; ++count) {
-				if (rhs&1) {
-					ret ^= lhs;
-				}
-
-				carry = static_cast<Byte>(lhs&0x80);
-				lhs <<= 1;
-
-				if (carry) {
-					lhs ^= 0x1b;
-				}
-
-				rhs >>= 1;
-			}
-
-			return ret;
 		}
 
 		inline void AddRoundKeyImpl(State *state, Key *key)
